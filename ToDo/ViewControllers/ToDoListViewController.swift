@@ -30,7 +30,7 @@ class ToDoListViewController: UITableViewController {
           newItem.notes = ""
           self.items.append(newItem)
           self.saveItems()
-          
+
       }
       
       alert.addTextField { (alertTextField) in
@@ -44,8 +44,25 @@ class ToDoListViewController: UITableViewController {
       present(alert, animated: true, completion: nil)
         
     }
-    
      
+    @IBAction func deleteItems(_ sender: Any) {
+        if let selectedRows = tableView.indexPathsForSelectedRows {
+             for indexPath in selectedRows {
+                let rowToDelete = indexPath.row > items.count-1 ? items.count-1 : indexPath.row
+                let item = items[rowToDelete]
+                
+                items.remove(at: rowToDelete)
+                context.delete(item)
+                }
+
+                tableView.beginUpdates()
+                tableView.deleteRows(at: selectedRows, with: .automatic)
+                tableView.endUpdates()
+             }
+                 saveItems()
+         }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -85,9 +102,7 @@ class ToDoListViewController: UITableViewController {
           }catch {
               print("Error saving context with \(error)")
           }
-          
-          self.tableView.reloadData()
-          
+           self.tableView.reloadData()
       }
      
       
@@ -113,29 +128,42 @@ class ToDoListViewController: UITableViewController {
     //MARK - TableView Delegate Methods
        
     
+    // enable editing mode:
+    
+       override func setEditing(_ editing: Bool, animated: Bool) {
+           super.setEditing(editing, animated: true)
+           tableView.setEditing(tableView.isEditing, animated: true)
+        
+        }
+    
     // select to toggle checkmark
     
        override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-           
+          
+        if tableView.isEditing {
+            return   //  not to intercept between didselectrow and editing
+        }
         
          let item = items[indexPath.row]
         
           item.done = !(item.done)
            
           saveItems()
-          
+ 
         }
     
     //swipe to delete
     
       override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
- 
-        let item = items[indexPath.row]
+            
+          let item = items[indexPath.row]
+          let indexPaths = [indexPath]
 
           context.delete(item)
           saveItems()
-          fetchItems() //reload tableview with new data
-          
+          items.remove(at: indexPath.row)
+          tableView.deleteRows(at: indexPaths, with: .automatic)
+             
         }
     
    //MARK - Delegate Methods
@@ -145,7 +173,7 @@ class ToDoListViewController: UITableViewController {
           if let editingCell = cell as? ToDoListTableViewCell {
               editingCell.name.text = item.name
                 
-              self.saveItems()
+              saveItems()
            }
       }
     

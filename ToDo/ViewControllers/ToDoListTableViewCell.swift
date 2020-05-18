@@ -14,11 +14,6 @@ class ToDoListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var check: UIImageView!
     
-    override func awakeFromNib() {
-           super.awakeFromNib()
-           // Initialization code
-       }
-    
 }
 
  

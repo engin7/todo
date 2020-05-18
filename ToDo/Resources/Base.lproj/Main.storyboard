@@ -58,11 +58,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="To-Do List" largeTitleDisplayMode="always" id="fvf-dE-DHu">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Fy9-lU-6NI">
-                            <connections>
-                                <action selector="addItem:" destination="T5z-HO-jaV" id="o0S-I3-bpL"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="Fy9-lU-6NI">
+                                <connections>
+                                    <action selector="addItem:" destination="T5z-HO-jaV" id="o0S-I3-bpL"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="trash.circle.fill" catalog="system" id="5G8-AJ-FPt">
+                                <connections>
+                                    <action selector="deleteItems:" destination="T5z-HO-jaV" id="BTD-H4-BuK"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ba0-e4-2LO" sceneMemberID="firstResponder"/>
@@ -184,5 +191,6 @@
     <resources>
         <image name="checkmark.square" catalog="system" width="64" height="56"/>
         <image name="square" catalog="system" width="64" height="56"/>
+        <image name="trash.circle.fill" catalog="system" width="64" height="60"/>
     </resources>
 </document>
