@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cwN-cE-43J">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
@@ -9,13 +9,13 @@
         <!--ToDo List-->
         <scene sceneID="KQ0-Vc-iql">
             <objects>
-                <viewController id="T5z-HO-jaV" userLabel="ToDo List" customClass="ToDoListViewController" customModule="to_do_app" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="T5z-HO-jaV" userLabel="ToDo List" customClass="ToDoListViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6qd-Ef-8hy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="ToDoItem" id="Sgg-wK-zUI">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="Item" id="Sgg-wK-zUI" customClass="ToDoListTableViewCell" customModule="ToDo" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="40.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Sgg-wK-zUI" id="G0w-Al-fmz">
@@ -45,13 +45,22 @@
                                         <constraint firstAttribute="bottom" secondItem="iiY-PG-dsL" secondAttribute="bottom" id="w9Q-Od-tyL"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="check" destination="iiY-PG-dsL" id="3C1-cM-wb8"/>
+                                    <outlet property="name" destination="qyO-CK-lDe" id="UZ6-AW-CE6"/>
+                                    <segue destination="Kw6-nc-sOC" kind="show" trigger="accessoryAction" id="COD-dq-bNy"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="T5z-HO-jaV" id="4Te-C1-C1g"/>
+                            <outlet property="delegate" destination="T5z-HO-jaV" id="nsU-8V-aQu"/>
+                        </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="To-Do List" largeTitleDisplayMode="always" id="fvf-dE-DHu">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Fy9-lU-6NI">
                             <connections>
-                                <segue destination="Kw6-nc-sOC" kind="show" id="rm5-Ir-MQ8"/>
+                                <action selector="addItem:" destination="T5z-HO-jaV" id="o0S-I3-bpL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -63,7 +72,7 @@
         <!--ToDo Detail-->
         <scene sceneID="49Z-jU-y2b">
             <objects>
-                <tableViewController id="Kw6-nc-sOC" userLabel="ToDo Detail" sceneMemberID="viewController">
+                <tableViewController id="Kw6-nc-sOC" userLabel="ToDo Detail" customClass="TodoItemDetailTableViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WBD-cB-Zpp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,9 +130,21 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="To-Do Item Details" id="us5-w0-SIW">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="8aP-Gh-e4y"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="rW3-Jr-7hQ"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="8aP-Gh-e4y">
+                            <connections>
+                                <action selector="cancel:" destination="Kw6-nc-sOC" id="GVX-k7-mtG"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="rW3-Jr-7hQ">
+                            <connections>
+                                <action selector="saveItemDetails:" destination="Kw6-nc-sOC" id="Zj2-c8-Woh"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="ItemNotes" destination="me6-Vs-YS1" id="WPw-Wx-jN9"/>
+                        <outlet property="itemName" destination="S4z-0L-Vdi" id="dfg-ok-lU1"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RZt-3o-lqL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
