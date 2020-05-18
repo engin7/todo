@@ -7,12 +7,17 @@
 //
 
 import XCTest
+import CoreData
 @testable import ToDo
 
 class ToDoTests: XCTestCase {
 
+    var sut:  ToDoListViewController!
+
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        super.setUp()
+
+        sut = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ToDoListViewController") as? ToDoListViewController
     }
 
     override func tearDown() {
@@ -20,7 +25,8 @@ class ToDoTests: XCTestCase {
     }
 
     func testExample() {
-        // This is an example of a functional test case.
+        
+          // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
@@ -31,4 +37,15 @@ class ToDoTests: XCTestCase {
         }
     }
 
+    func testBarButtonItemsAreSet() {
+       
+ 
+       let addButton = sut.navigationItem.rightBarButtonItem
+       
+       XCTAssertNotNil(addButton, "Should not be nil")
+       XCTAssertEqual(addButton!.action, Selector(("addItem")), "Action should be addItem")
+     }
+     
+    
 }
+

@@ -11,6 +11,6 @@ import Foundation
 import CoreData
 
 @objc(Items)
-public class Items: NSManagedObject {
+public class todoItem: NSManagedObject {
 
 }

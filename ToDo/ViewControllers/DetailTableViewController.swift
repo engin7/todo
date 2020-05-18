@@ -8,38 +8,37 @@
 
 import UIKit
 
-
-protocol TodoItemDetailTableViewControllerDelegate: class{
+protocol  DetailTableViewControllerDelegate: class{
  
-   func TodoItemDetailTableViewControllerDidCancel( controller: TodoItemDetailTableViewController)
+   func  DetailTableViewControllerDidCancel( controller: DetailTableViewController)
   
-   func TodoItemDetailTableViewController( controller: TodoItemDetailTableViewController, didFinishEditing item: Items)
+   func  DetailTableViewController( controller: DetailTableViewController, didFinishEditing item: todoItem)
 }
 
 
-class TodoItemDetailTableViewController: UITableViewController {
+class DetailTableViewController: UITableViewController {
 
-       weak var delegate: TodoItemDetailTableViewControllerDelegate?
-       weak var todoItem: Items?
+        weak var delegate: DetailTableViewControllerDelegate?
+        weak var ToDoItem: todoItem?
  
      
     @IBOutlet weak var ItemName: UITextField!
     @IBOutlet weak var ItemNotes: UITextView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
-    
+
     @IBAction func cancel(_ sender: Any) {
-        
-        delegate?.TodoItemDetailTableViewControllerDidCancel(controller: self)
+    
+        delegate?.DetailTableViewControllerDidCancel(controller: self)
 
     }
     
     
     @IBAction func saveItemDetails(_ sender: Any) {
-        
-        if let item = todoItem, let text = ItemName.text, let note = ItemNotes.text {
+    
+         if let item = ToDoItem, let text = ItemName.text, let note = ItemNotes.text {
                    item.name = text
                    item.notes = note
-                   delegate?.TodoItemDetailTableViewController(controller: self, didFinishEditing: item)
+                   delegate?.DetailTableViewController(controller: self, didFinishEditing: item)
                }
     }
   
@@ -47,7 +46,7 @@ class TodoItemDetailTableViewController: UITableViewController {
         super.viewDidLoad()
         
         
-       if let item = todoItem {
+       if let item = ToDoItem {
         
         title = "Edit Item"
        
@@ -74,7 +73,7 @@ class TodoItemDetailTableViewController: UITableViewController {
   
 }
 
-extension TodoItemDetailTableViewController: UITextFieldDelegate {
+extension DetailTableViewController: UITextFieldDelegate {
    
        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
          ItemName.resignFirstResponder()

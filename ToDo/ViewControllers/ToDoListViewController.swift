@@ -13,7 +13,7 @@ class ToDoListViewController: UITableViewController {
    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-     private var items = [Items]()
+   private var items = [todoItem]()
     
     @IBOutlet weak var deleteButton: UIBarButtonItem!
     
@@ -28,7 +28,7 @@ class ToDoListViewController: UITableViewController {
       }
       let action = UIAlertAction(title: "Save", style: .default) { (action) in
           
-          let newItem = Items(context: self.context)
+          let newItem = todoItem(context: self.context)
           newItem.name = alert.textFields![0].text!
           newItem.done = false
           newItem.notes = ""
@@ -97,7 +97,7 @@ class ToDoListViewController: UITableViewController {
         func fetchItems(){
 
          do {
-           items = try context.fetch(Items.fetchRequest())
+           items = try context.fetch(todoItem.fetchRequest())
          } catch let error as NSError {
            print("Could not fetch. \(error), \(error.userInfo)")
          }
@@ -189,7 +189,7 @@ class ToDoListViewController: UITableViewController {
     
    //MARK - Delegate Methods
     
-    func configureText(for cell: UITableViewCell, with item: Items){
+    func configureText(for cell: UITableViewCell, with item: todoItem){
            
           if let editingCell = cell as? ToDoListTableViewCell {
               editingCell.name.text = item.name
@@ -202,12 +202,12 @@ class ToDoListViewController: UITableViewController {
           override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
              
              if segue.identifier == "EditItemSegue"  {
-               if let editItemViewController = segue.destination as? TodoItemDetailTableViewController {
+               if let editItemViewController = segue.destination as? DetailTableViewController {
                   if let cell = sender as? UITableViewCell,
                       let indexPath = tableView.indexPath(for: cell)
                    {
                       let item = items[indexPath.row]
-                    editItemViewController.todoItem = item
+                    editItemViewController.ToDoItem = item
                      editItemViewController.delegate = self
                     
                     }
@@ -217,9 +217,9 @@ class ToDoListViewController: UITableViewController {
      
      }
     
-extension ToDoListViewController: TodoItemDetailTableViewControllerDelegate {
+extension ToDoListViewController: DetailTableViewControllerDelegate {
     
-    func TodoItemDetailTableViewController(controller: TodoItemDetailTableViewController, didFinishEditing item: Items) {
+    func DetailTableViewController(controller: DetailTableViewController, didFinishEditing item: todoItem) {
         
         if let index = items.firstIndex(of: item) {
             let indexPath = IndexPath(row: index, section: 0)
@@ -234,7 +234,7 @@ extension ToDoListViewController: TodoItemDetailTableViewControllerDelegate {
     }
     
     
-    func TodoItemDetailTableViewControllerDidCancel(controller: TodoItemDetailTableViewController) {
+    func DetailTableViewControllerDidCancel(controller: DetailTableViewController) {
         navigationController?.popViewController(animated: true)
     }
      

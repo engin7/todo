@@ -9,7 +9,7 @@
         <!--ToDo List-->
         <scene sceneID="KQ0-Vc-iql">
             <objects>
-                <viewController id="T5z-HO-jaV" userLabel="ToDo List" customClass="ToDoListViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ToDoListViewController" id="T5z-HO-jaV" userLabel="ToDo List" customClass="ToDoListViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="6qd-Ef-8hy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -43,6 +43,7 @@
                                         <constraint firstItem="iiY-PG-dsL" firstAttribute="leading" secondItem="G0w-Al-fmz" secondAttribute="leading" constant="8" id="XjF-Sq-cmv"/>
                                         <constraint firstItem="qyO-CK-lDe" firstAttribute="centerY" secondItem="G0w-Al-fmz" secondAttribute="centerY" id="fBE-on-OGO"/>
                                         <constraint firstAttribute="bottom" secondItem="iiY-PG-dsL" secondAttribute="bottom" id="w9Q-Od-tyL"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qyO-CK-lDe" secondAttribute="trailing" constant="20" symbolic="YES" id="wED-8x-xUv"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -82,7 +83,7 @@
         <!--ToDo Detail-->
         <scene sceneID="49Z-jU-y2b">
             <objects>
-                <tableViewController id="Kw6-nc-sOC" userLabel="ToDo Detail" customClass="TodoItemDetailTableViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Kw6-nc-sOC" userLabel="ToDo Detail" customClass="DetailTableViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WBD-cB-Zpp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

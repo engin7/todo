@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="18G4032" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Items" representedClassName=".Items" syncable="YES">
+    <entity name="todoItem" representedClassName=".todoItem" syncable="YES">
         <attribute name="done" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="notes" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Items" positionX="-45" positionY="0" width="128" height="88"/>
+        <element name="todoItem" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>
