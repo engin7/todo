@@ -48,7 +48,7 @@
                                 <connections>
                                     <outlet property="check" destination="iiY-PG-dsL" id="3C1-cM-wb8"/>
                                     <outlet property="name" destination="qyO-CK-lDe" id="UZ6-AW-CE6"/>
-                                    <segue destination="Kw6-nc-sOC" kind="show" trigger="accessoryAction" id="COD-dq-bNy"/>
+                                    <segue destination="Kw6-nc-sOC" kind="show" identifier="EditItemSegue" trigger="accessoryAction" id="COD-dq-bNy"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -87,13 +87,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S4z-0L-Vdi" userLabel="toDoItem Name">
-                                                    <rect key="frame" x="16" y="4" width="97" height="34"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S4z-0L-Vdi" userLabel="ItemName">
+                                                    <rect key="frame" x="16" y="4" width="343" height="34.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="S4z-0L-Vdi" secondAttribute="bottom" constant="5.5" id="Clz-yZ-Soi"/>
+                                                <constraint firstItem="S4z-0L-Vdi" firstAttribute="leading" secondItem="eoG-we-Zqs" secondAttribute="leading" constant="16" id="PI1-bG-Xm9"/>
+                                                <constraint firstAttribute="trailing" secondItem="S4z-0L-Vdi" secondAttribute="trailing" constant="16" id="duo-LL-jih"/>
+                                                <constraint firstItem="S4z-0L-Vdi" firstAttribute="top" secondItem="eoG-we-Zqs" secondAttribute="top" constant="4" id="wgM-qo-X5q"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="296" id="uZ3-X3-K5U">
@@ -103,22 +108,29 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="296"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="NOTES" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="588-nD-2lc" userLabel="toDoItem Name">
-                                                    <rect key="frame" x="155" y="11" width="65" height="34"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="me6-Vs-YS1">
-                                                    <rect key="frame" x="16" y="53" width="343" height="232"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="me6-Vs-YS1">
+                                                    <rect key="frame" x="16" y="55.5" width="343" height="229.5"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOTES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SJK-CF-IMa">
+                                                    <rect key="frame" x="160" y="19" width="55.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="me6-Vs-YS1" firstAttribute="top" secondItem="SJK-CF-IMa" secondAttribute="bottom" constant="16" id="9AN-sY-bIU"/>
+                                                <constraint firstItem="SJK-CF-IMa" firstAttribute="top" secondItem="Nqk-Vk-AvP" secondAttribute="topMargin" constant="8" id="Oh2-pC-Pud"/>
+                                                <constraint firstItem="me6-Vs-YS1" firstAttribute="centerX" secondItem="SJK-CF-IMa" secondAttribute="centerX" id="Raa-au-Wee"/>
+                                                <constraint firstItem="me6-Vs-YS1" firstAttribute="bottom" secondItem="Nqk-Vk-AvP" secondAttribute="bottomMargin" id="RdU-na-Yzs"/>
+                                                <constraint firstItem="me6-Vs-YS1" firstAttribute="leading" secondItem="Nqk-Vk-AvP" secondAttribute="leadingMargin" id="bXe-GW-nHD"/>
+                                                <constraint firstItem="SJK-CF-IMa" firstAttribute="centerX" secondItem="Nqk-Vk-AvP" secondAttribute="centerX" id="kC3-uB-lzp"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -142,8 +154,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="ItemName" destination="S4z-0L-Vdi" id="5pO-fe-WLb"/>
                         <outlet property="ItemNotes" destination="me6-Vs-YS1" id="WPw-Wx-jN9"/>
-                        <outlet property="itemName" destination="S4z-0L-Vdi" id="dfg-ok-lU1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RZt-3o-lqL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
