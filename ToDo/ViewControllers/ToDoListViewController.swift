@@ -15,36 +15,35 @@ class ToDoListViewController: UITableViewController {
     
      private var items = [Items]()
     
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
     
     @IBAction func addItem(_ sender: Any) {
         
-      var textField = UITextField()
-
+//      var textField = UITextField()
+       
       let alert = UIAlertController(title: "Add new item", message: "", preferredStyle: .alert)
-      
+      alert.addTextField { (textField) in
+          textField.placeholder = "Create New Item"
+          textField.addTarget(self, action: #selector(self.alertTextFieldDidChange(field:)), for: UIControl.Event.editingChanged)
+      }
       let action = UIAlertAction(title: "Save", style: .default) { (action) in
-        
+          
           let newItem = Items(context: self.context)
-          newItem.name = textField.text!
+          newItem.name = alert.textFields![0].text!
           newItem.done = false
           newItem.notes = ""
           self.items.append(newItem)
           self.saveItems()
-
+       
       }
-      
-      alert.addTextField { (alertTextField) in
-          alertTextField.placeholder = "Create New Item"
-          textField = alertTextField
-          
-      }
+      action.isEnabled = false
       
       alert.addAction(action)
       
       present(alert, animated: true, completion: nil)
-        
+   
     }
-     
+  
     @IBAction func deleteItems(_ sender: Any) {
         if let selectedRows = tableView.indexPathsForSelectedRows {
              for indexPath in selectedRows {
@@ -54,10 +53,12 @@ class ToDoListViewController: UITableViewController {
                 items.remove(at: rowToDelete)
                 context.delete(item)
                 }
-
+                deleteButton.isEnabled = false
+                
                 tableView.beginUpdates()
                 tableView.deleteRows(at: selectedRows, with: .automatic)
                 tableView.endUpdates()
+                 
              }
                  saveItems()
          }
@@ -65,7 +66,8 @@ class ToDoListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      
+        deleteButton.isEnabled = false
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = editButtonItem
         tableView.allowsMultipleSelectionDuringEditing = true
@@ -77,6 +79,15 @@ class ToDoListViewController: UITableViewController {
             fetchItems()
        }
     
+    // alert textfield restriction
+    
+     @objc func alertTextFieldDidChange(field: UITextField){
+             let alertController:UIAlertController = self.presentedViewController as! UIAlertController
+             let textField :UITextField  = alertController.textFields![0]
+             let addAction: UIAlertAction = alertController.actions[0]
+             addAction.isEnabled = (textField.text?.count)! > 3
+
+         }
     
     //MARK - CoreData Methods
     
@@ -114,7 +125,7 @@ class ToDoListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+       
         let cell = tableView.dequeueReusableCell(withIdentifier: "Item", for: indexPath) as! ToDoListTableViewCell
         
         let item = items[indexPath.row]
@@ -133,14 +144,16 @@ class ToDoListViewController: UITableViewController {
        override func setEditing(_ editing: Bool, animated: Bool) {
            super.setEditing(editing, animated: true)
            tableView.setEditing(tableView.isEditing, animated: true)
-        
+ 
         }
-    
+  
     // select to toggle checkmark
     
        override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
           
         if tableView.isEditing {
+             
+            deleteButton.isEnabled = true
             return   //  not to intercept between didselectrow and editing
         }
         
@@ -150,6 +163,14 @@ class ToDoListViewController: UITableViewController {
            
           saveItems()
  
+        }
+    
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+           
+          if tableView.isEditing && tableView.indexPathsForSelectedRows == nil {
+            deleteButton.isEnabled = false
+          }
+          
         }
     
     //swipe to delete
@@ -193,6 +214,7 @@ class ToDoListViewController: UITableViewController {
                  }
               }
           }
+     
      }
     
 extension ToDoListViewController: TodoItemDetailTableViewControllerDelegate {

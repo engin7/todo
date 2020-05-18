@@ -24,9 +24,9 @@ class TodoItemDetailTableViewController: UITableViewController {
  
      
     @IBOutlet weak var ItemName: UITextField!
-    
     @IBOutlet weak var ItemNotes: UITextView!
-  
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
     @IBAction func cancel(_ sender: Any) {
         
         delegate?.TodoItemDetailTableViewControllerDidCancel(controller: self)
@@ -76,9 +76,26 @@ class TodoItemDetailTableViewController: UITableViewController {
 
 extension TodoItemDetailTableViewController: UITextFieldDelegate {
    
-   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-     ItemName.resignFirstResponder()
-       return false
+       func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+         ItemName.resignFirstResponder()
+           return false
+       }
+     
+        //avoid very short entries
+       func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+           
+           guard let oldText = ItemName.text,
+               let stringRange = Range(range, in: oldText) else {
+             return false
+           }
+           
+           let newText = oldText.replacingCharacters(in: stringRange, with: string)
+           if newText.count < 4 {
+               saveButton.isEnabled = false
+           } else {
+               saveButton.isEnabled = true
+           }
+               return true
    }
- 
+    
 }

@@ -71,6 +71,9 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="deleteButton" destination="5G8-AJ-FPt" id="ja9-Km-b9x"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ba0-e4-2LO" sceneMemberID="firstResponder"/>
             </objects>
@@ -163,6 +166,7 @@
                     <connections>
                         <outlet property="ItemName" destination="S4z-0L-Vdi" id="5pO-fe-WLb"/>
                         <outlet property="ItemNotes" destination="me6-Vs-YS1" id="WPw-Wx-jN9"/>
+                        <outlet property="saveButton" destination="rW3-Jr-7hQ" id="sor-fG-RmO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RZt-3o-lqL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
