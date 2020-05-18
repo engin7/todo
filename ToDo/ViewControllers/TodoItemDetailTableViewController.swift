@@ -26,32 +26,31 @@ class TodoItemDetailTableViewController: UITableViewController {
     @IBOutlet weak var ItemName: UITextField!
     
     @IBOutlet weak var ItemNotes: UITextView!
- 
-     
-    
+  
     @IBAction func cancel(_ sender: Any) {
         
-        navigationController?.popViewController(animated: true)
+        delegate?.TodoItemDetailTableViewControllerDidCancel(controller: self)
 
     }
     
     
     @IBAction func saveItemDetails(_ sender: Any) {
         
-        if let item = todoItem, let text = ItemName.text {
+        if let item = todoItem, let text = ItemName.text, let note = ItemNotes.text {
                    item.name = text
+                   item.notes = note
                    delegate?.TodoItemDetailTableViewController(controller: self, didFinishEditing: item)
                }
-       
     }
   
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
        if let item = todoItem {
-           
+        
         title = "Edit Item"
-
+       
         ItemName.text = item.name
         ItemNotes.text = item.notes
         
@@ -61,7 +60,12 @@ class TodoItemDetailTableViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-           ItemName.becomeFirstResponder()
+          
+         ItemNotes.layer.cornerRadius = 5
+         ItemNotes.layer.borderColor = UIColor.lightGray.cgColor
+         ItemNotes.layer.borderWidth = 1
+        
+          ItemName.becomeFirstResponder()
        }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {

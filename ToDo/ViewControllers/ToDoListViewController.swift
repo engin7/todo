@@ -48,6 +48,7 @@ class ToDoListViewController: UITableViewController {
      
     override func viewDidLoad() {
         super.viewDidLoad()
+
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = editButtonItem
         tableView.allowsMultipleSelectionDuringEditing = true
@@ -143,7 +144,8 @@ class ToDoListViewController: UITableViewController {
            
           if let editingCell = cell as? ToDoListTableViewCell {
               editingCell.name.text = item.name
-               self.saveItems()
+                
+              self.saveItems()
            }
       }
     
@@ -172,7 +174,7 @@ extension ToDoListViewController: TodoItemDetailTableViewControllerDelegate {
         if let index = items.firstIndex(of: item) {
             let indexPath = IndexPath(row: index, section: 0)
              if let cell = tableView.cellForRow(at: indexPath) {
-                  configureText(for: cell, with: item)
+             configureText(for: cell, with: item)
                 
                 }
           }
