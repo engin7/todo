@@ -72,6 +72,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="Fy9-lU-6NI" id="S3j-CE-qYw"/>
                         <outlet property="deleteButton" destination="5G8-AJ-FPt" id="ja9-Km-b9x"/>
                     </connections>
                 </viewController>

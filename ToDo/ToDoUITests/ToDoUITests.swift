@@ -35,14 +35,20 @@ class ToDoUITests: XCTestCase {
     }
     
     func testTapCell() {
-        // have at least one item in DataBase, working on *modified Core Data stack as tests doesn't comply with Repeatable principle for now.
-
-             let tableView = app.tables["List todos"]
+        // TODO: Remove the item you added
+        
+        let addButton = app.buttons["Add"]
+            addButton.tap()
+            let addAlert = app.alerts
+            let textField = addAlert.textFields.element
+            textField.typeText("Go to lunch")
+            app.tap()
+            let tableView = app.tables["List todos"]
             let cell = tableView.cells.element(matching: .cell, identifier: "myCell_0")
             XCTAssert(cell.exists && cell.isHittable)
              
        }
-     // have at least one item in DataBase, see  comment above
+     //  If you're doing only this test make sure have at least one item in DataBase.
      func testAccessibilityButton() {
            
            let tableView = app.tables["List todos"]

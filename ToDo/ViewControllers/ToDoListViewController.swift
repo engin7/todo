@@ -15,12 +15,12 @@ class ToDoListViewController: UITableViewController {
     
    private var items = [todoItem]()
     
+    
+    @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var deleteButton: UIBarButtonItem!
     
     @IBAction func addItem(_ sender: Any) {
         
-//      var textField = UITextField()
-       
       let alert = UIAlertController(title: "Add new item", message: "", preferredStyle: .alert)
       alert.addTextField { (textField) in
           textField.placeholder = "Create New Item"
@@ -39,7 +39,6 @@ class ToDoListViewController: UITableViewController {
       action.isEnabled = false
       
       alert.addAction(action)
-      print(alert.description)
       present(alert, animated: true, completion: nil)
    
     }
@@ -72,6 +71,7 @@ class ToDoListViewController: UITableViewController {
         navigationItem.leftBarButtonItem = editButtonItem
         tableView.allowsMultipleSelectionDuringEditing = true
         tableView.accessibilityIdentifier = "List todos"
+        addButton.accessibilityLabel = "Add"
     }
     
     override func viewWillAppear(_ animated: Bool) {
