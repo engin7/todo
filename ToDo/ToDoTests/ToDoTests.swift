@@ -6,6 +6,9 @@
 //  Copyright © 2020 Engin KUK. All rights reserved.
 //
 
+// TODO: - CoreData UnitTests
+
+
 import XCTest
 import CoreData
 @testable import ToDo
@@ -21,7 +24,8 @@ class ToDoTests: XCTestCase {
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
+        super.tearDown()
     }
 
     func testExample() {
@@ -37,15 +41,13 @@ class ToDoTests: XCTestCase {
         }
     }
 
-    func testBarButtonItemsAreSet() {
-       
- 
-       let addButton = sut.navigationItem.rightBarButtonItem
-       
-       XCTAssertNotNil(addButton, "Should not be nil")
-       XCTAssertEqual(addButton!.action, Selector(("addItem")), "Action should be addItem")
-     }
-     
+     func testBarButtonItemsAreSet() {
+          
+           let addButton = sut.navigationItem.rightBarButtonItem
+            
+             XCTAssertNotNil(addButton, "Should not be nil")
+             XCTAssertEqual(addButton!.action, #selector(UIPushBehavior.addItem(_:)), "Action should be addItem")
+          }
     
 }
 

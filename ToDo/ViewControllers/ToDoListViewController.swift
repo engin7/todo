@@ -39,7 +39,7 @@ class ToDoListViewController: UITableViewController {
       action.isEnabled = false
       
       alert.addAction(action)
-      
+      print(alert.description)
       present(alert, animated: true, completion: nil)
    
     }
@@ -71,7 +71,7 @@ class ToDoListViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.leftBarButtonItem = editButtonItem
         tableView.allowsMultipleSelectionDuringEditing = true
-        
+        tableView.accessibilityIdentifier = "List todos"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,7 +89,7 @@ class ToDoListViewController: UITableViewController {
 
          }
     
-    //MARK - CoreData Methods
+    //MARK: - CoreData Methods
     
     
     // fetch from CoreData
@@ -117,7 +117,7 @@ class ToDoListViewController: UITableViewController {
       }
      
       
-    //MARK - TableView Datasource Methods
+    //MARK: - TableView Datasource Methods
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -132,11 +132,12 @@ class ToDoListViewController: UITableViewController {
         
         cell.name.text = item.name
         cell.check.isHighlighted = item.done
+        cell.accessibilityIdentifier = "myCell_\(indexPath.row)"
 
         return cell
     }
     
-    //MARK - TableView Delegate Methods
+    //MARK: - TableView Delegate Methods
        
     
     // enable editing mode:
@@ -187,7 +188,7 @@ class ToDoListViewController: UITableViewController {
              
         }
     
-   //MARK - Delegate Methods
+   //MARK: - Delegate Methods
     
     func configureText(for cell: UITableViewCell, with item: todoItem){
            
