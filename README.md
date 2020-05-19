@@ -14,8 +14,9 @@ Swift 5.0+
 
 ## License
 
-This app is opensource. Feel free to contribute. 
+This app is open source. 
 If you find a bug please open an issue.
+Feel free to contribute. 
 
 Thank you.
 
