@@ -45,6 +45,9 @@
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qyO-CK-lDe" secondAttribute="trailing" constant="20" symbolic="YES" id="wED-8x-xUv"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                                 <connections>
                                     <outlet property="check" destination="iiY-PG-dsL" id="3C1-cM-wb8"/>
                                     <outlet property="name" destination="qyO-CK-lDe" id="UZ6-AW-CE6"/>
