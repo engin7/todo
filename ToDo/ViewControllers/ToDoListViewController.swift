@@ -89,7 +89,7 @@ class ToDoListViewController: UITableViewController {
 
          }
     
-    //MARK: - CoreData Methods
+    // MARK: - CoreData Methods
     
     
     // fetch from CoreData
@@ -117,7 +117,7 @@ class ToDoListViewController: UITableViewController {
       }
      
       
-    //MARK: - TableView Datasource Methods
+    // MARK: - TableView Datasource Methods
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -128,16 +128,15 @@ class ToDoListViewController: UITableViewController {
        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Item", for: indexPath) as! ToDoListTableViewCell
         
-        let item = items[indexPath.row]
-        
-        cell.name.text = item.name
-        cell.check.isHighlighted = item.done
+         let item = items[indexPath.row]
+         cell.name.text = item.name
+         cell.check.isHighlighted = item.done
+    
         cell.accessibilityIdentifier = "myCell_\(indexPath.row)"
-
         return cell
     }
     
-    //MARK: - TableView Delegate Methods
+    // MARK: - TableView Delegate Methods
        
     
     // enable editing mode:
@@ -145,7 +144,11 @@ class ToDoListViewController: UITableViewController {
        override func setEditing(_ editing: Bool, animated: Bool) {
            super.setEditing(editing, animated: true)
            tableView.setEditing(tableView.isEditing, animated: true)
- 
+           
+        if editing == false {
+            deleteButton.isEnabled = false
+            
+         }
         }
   
     // select to toggle checkmark
@@ -188,7 +191,7 @@ class ToDoListViewController: UITableViewController {
              
         }
     
-   //MARK: - Delegate Methods
+   // MARK: - Delegate Methods
     
     func configureText(for cell: UITableViewCell, with item: todoItem){
            

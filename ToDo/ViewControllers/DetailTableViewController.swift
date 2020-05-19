@@ -73,6 +73,8 @@ class DetailTableViewController: UITableViewController {
   
 }
 
+    // MARK: - Extensions
+
 extension DetailTableViewController: UITextFieldDelegate {
    
        func textFieldShouldReturn(_ textField: UITextField) -> Bool {

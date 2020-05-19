@@ -14,6 +14,8 @@ class ToDoListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var check: UIImageView!
     
+     
+    
 }
 
  
